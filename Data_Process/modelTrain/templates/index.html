@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>羽毛球训练分析（测试模式）</title>
+    <script>
+        async function updateData() {
+            let response = await fetch('/sensor_data');
+            let data = await response.json();
+            document.getElementById("roll_velocity").innerText = data.data.roll_velocity.toFixed(2);
+            document.getElementById("pitch_velocity").innerText = data.data.pitch_velocity.toFixed(2);
+            document.getElementById("yaw_velocity").innerText = data.data.yaw_velocity.toFixed(2);
+            document.getElementById("roll_acceleration").innerText = data.data.roll_acceleration.toFixed(2);
+            document.getElementById("pitch_acceleration").innerText = data.data.pitch_acceleration.toFixed(2);
+            document.getElementById("yaw_acceleration").innerText = data.data.yaw_acceleration.toFixed(2);
+            document.getElementById("peak_count").innerText = data.data.peak_count;
+            document.getElementById("action").innerText = data.predicted_action;
+            document.getElementById("feedback").innerText = data.feedback;
+        }
+        setInterval(updateData, 3000);
+    </script>
+</head>
+<body>
+    <h1>羽毛球训练分析（测试模式）</h1>
+    <h2>传感器数据（模拟）</h2>
+    <p>Roll Velocity: <span id="roll_velocity">0</span></p>
+    <p>Pitch Velocity: <span id="pitch_velocity">0</span></p>
+    <p>Yaw Velocity: <span id="yaw_velocity">0</span></p>
+    <p>Roll Acceleration: <span id="roll_acceleration">0</span></p>
+    <p>Pitch Acceleration: <span id="pitch_acceleration">0</span></p>
+    <p>Yaw Acceleration: <span id="yaw_acceleration">0</span></p>
+    <p>Peak Count: <span id="peak_count">0</span></p>
+
+    <h2>分析结果</h2>
+    <p>预测动作: <span id="action">等待数据...</span></p>
+    <h3>训练建议</h3>
+    <p id="feedback">等待数据...</p>
+</body>
+</html>
